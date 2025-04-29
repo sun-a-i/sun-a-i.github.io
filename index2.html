@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주)만들다소프트</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            color: white;
+            z-index: 2;
+            text-align: left;
+            opacity: 0;
+            transition: all 1s ease-out;
+            transform: translateX(-50px);
+        }
+
+        .overlay-text h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .overlay-text p {
+            font-size: 20px;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .content-section {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 50px 0;
+align-items: center;
+        }
+
+        .content-box {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .content-box img {
+            width: 100%;
+            height: auto;
+            max-height: 700px;
+            object-fit: cover;
+        }
+
+        .content-text {
+            padding: 20px;
+	justify-content: center;
+        }
+
+        .content-text h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .content-text p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* 하단 섹션 */
+        .features-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #2C2C2C;
+            color: white;
+        }
+
+        .feature-box {
+            width: 30%;
+            text-align: center;
+        }
+
+        .feature-box img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .feature-box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .feature-box p {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* 팀 섹션 */
+        .team-section {
+            display: flex;
+            padding: 50px;
+            background-color: #f5f5f5;
+        }
+
+        .team-text {
+            width: 40%;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+
+        .team-text h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .team-text p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 60%;
+        }
+
+        .team-grid img {
+            width: 50%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        /* 반응형 수정 */
+        @media screen and (max-width: 768px) {
+            .content-box, .feature-box {
+                width: 100%;
+            }
+
+            .team-section {
+                flex-direction: column;
+            }
+
+            .team-text {
+                width: 100%;
+                padding-bottom: 20px;
+            }
+
+            .team-grid {
+                width: 100%;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 연락처 섹션 */
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #f5f5f5;
+flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
+        }
+
+        .contact-box {
+            width: 30%;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+ box-sizing: border-box; /* 박스 크기를 잘 관리하도록 추가 */
+        }
+
+        .contact-box h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .contact-box input, 
+        .contact-box textarea, 
+        .contact-box button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .contact-box textarea {
+            height: 120px;
+        }
+
+        .contact-box button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .contact-box button:hover {
+            background-color: #0056b3;
+        }
+
+        .contact-info {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .map {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+            border: 0;
+        }
+/* 반응형 디자인 */
+@media screen and (max-width: 992px) {
+    .contact-box {
+        width: 45%; /* 작은 화면에서는 더 넓게 설정 */
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .contact-box {
+        width: 100%; /* 작은 화면에서는 가득 채우기 */
+    }
+}
+
+        /* 푸터 섹션 */
+        .footer {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        /* 반응형 디자인 */
+        @media screen and (max-width: 992px) {
+            .contact-section {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .contact-box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .map {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 비디오 섹션 -->
+    <div class="container">
+        <iframe src="https://www.youtube.com/embed/fEEPxeDGV08?autoplay=1&mute=1&loop=1&playlist=fEEPxeDGV08" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="overlay-text visible" id="textOverlay">
+            <h1>우리는 만들다소프트입니다</h1>
+            <p>더 안전한 세상을 위한 혁신 기술</p>
+        </div>
+    </div>
+
+    <!-- 레이아웃 섹션 -->
+    <div class="content-section">
+        <div class="content-box content-text">
+            <h2>만들다소프트 소개</h2>
+            <h3>목적을 가진 선구적 기술</h3>
+            <p>
+                만들다소프트는 기술을 통해 의미 있는 솔루션을 만들어가는 기업입니다. 저희는 안드로이드와 iOS 모든 마켓에 공개된 "다함께차찾자"라는 어플을 개발했습니다. 이 어플은 차량의 위치를 찾는 것뿐만 아니라 복잡한 다층 지하 주차장에서도 정확하게 차량이 주차된 층을 알려줍니다.
+                또한 차량 위치 확인 외에도 미아 찾기, 응급 구조 상황, 건물 붕괴 시 구조자 위치 파악 등 다양한 상황에서 활용할 수 있으며, 목적지까지 정확한 안내를 제공합니다. 저희는 더 안전하고 연결된 세상을 만들기 위해 끊임없이 혁신하고 있습니다.
+            </p>
+        </div>
+        <div class="content-box">
+            <img src="img/background.png" alt="앱 소개 이미지">
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="content-box">
+            <img src="img/back2.jpg" alt="팀 이미지">
+        </div>
+        <div class="content-box content-text">
+            <h2>우리의 이야기</h2>
+            <h3>혁신과 안전에 대한 열정</h3>
+            <p>
+                만들다소프트는 기술이 일상생활을 어떻게 지원하는지에 대한 새로운 비전을 가지고 시작했습니다. "다함께차찾자"는 실생활 문제를 해결하기 위한 혁신적인 접근 방식을 통해 사용자에게 안전을 제공하는 대표적인 사례입니다. 차량 위치 확인뿐만 아니라 긴급 구조 상황에서도 귀하의 안전을 지켜주는 우리의 기술력은 끊임없는 발전과 도전의 결과입니다.
+            </p>
+        </div>
+    </div>
+
+    <!-- 하단 기능 섹션 -->
+    <div class="features-section">
+	        <div class="feature-box">
+            <img src="img/shake_hand.png" alt="협업 아이콘">
+            <h3>협업</h3>
+            <p>
+                만들다소프트는 협업이 최고의 아이디어를 만든다고 믿습니다. 저희 팀은 다양한 재능과 전문 지식을 결합해 성공적인 프로젝트를 수행합니다.
+            </p>
+        </div>
+        <div class="feature-box">
+            <img src="img/skill.png" alt="기술 아이콘">
+            <h3>최첨단 기술</h3>
+            <p>
+                우리는 최신 기술을 적극적으로 도입하여 실생활 문제를 해결하고, 업계의 선두에서 혁신을 주도하고 있습니다.
+            </p>
+        </div>
+        <div class="feature-box">
+            <img src="img/trust.png" alt="신뢰 아이콘">
+            <h3>신뢰</h3>
+            <p>
+                고객과의 신뢰 구축은 저희의 최우선 과제입니다. 저희 제품은 신뢰할 수 있는 솔루션을 제공하여 고객에게 안전과 안정성을 보장합니다.
+            </p>
+        </div>
+    </div>
+
+    <!-- 팀 섹션 -->
+    <div class="team-section">
+        <div class="team-text">
+            <h2>애플리케이션 소개</h2>
+            <h3>혁신을 이끄는 아이템</h3>
+            <p>
+                "다함께차찾자"는 다양한 산업의 요구를 충족시키기 위해 혁신적이고 높은 확장성을 가진 솔루션을 제공합니다.
+	    </p>
+	    <p>
+		고도 기반 추적 기술은 AI와 GIS 기술을 융합하여 다양한 플랫폼에서 작동하며, 정확하고 신뢰할 수 있는 위치를 제공합니다. 
+	    </p>
+
+	    <p>
+		이 서비스는 넓은 산업에서 응용하여 활용할 수 있는 다목적 도구입니다. 
+	    </p>
+        </div>
+        <div class="team-grid">
+            <img src="img/2.png" alt="팀원 1">
+            <img src="img/3.png" alt="팀원 2">
+            <img src="img/4.png" alt="팀원 3">
+            <img src="img/5.png" alt="팀원 4">
+            <img src="img/6.png" alt="팀원 5">
+            <img src="img/7.png" alt="팀원 6">
+        </div>
+    </div>
+
+    <!-- 연락처 섹션 -->
+    <div class="contact-section">
+        <!-- 문의하기 양식 -->
+        <div class="contact-box">
+            <h2>문의하기</h2>
+		<form action="mailto:sun@mdd.kr" method="post">
+		    <input type="text" name="name" placeholder="이름을 입력해주세요" required>
+		    <input type="email" name="email" placeholder="이메일을 입력해주세요" required>
+		    <input type="tel" name="phone" placeholder="전화번호를 입력해주세요" required>
+		    <textarea name="message" placeholder="메시지를 입력해주세요" required></textarea>
+		    <button type="submit">제출</button>
+		</form>
+        </div>
+
+        <!-- 연락처 정보 -->
+        <div class="contact-box">
+            <h2>연락처</h2>
+            <p class="contact-info">
+                만들다소프트는 언제나 귀하의 문의를 환영합니다. 궁금한 사항이나 지원이 필요하시면 언제든지 아래 연락처로 연락주세요.<br><br>
+                Number: 070-8098-1269<br>
+                Email: sun@mdd.kr<br><br>
+                귀하와의 소통을 기대합니다.
+            </p>
+        </div>
+
+        <!-- 위치 안내 섹션 -->
+        <div class="contact-box">
+            <h2>위치 안내</h2>
+            <p class="contact-info">
+                저희는 다음 주소에서 찾으실 수 있습니다:<br>
+                경기도 안양시 동안구 시민대로327번길 11-41,3층 3417호(관양동)<br>
+                (11-41, Simin-daero 327beon-gil, Dongan-gu, Anyang-si, Gyeonggi-do, Republic of Korea)
+            </p>
+            <!-- 구글 지도 임베드 -->
+
+
+<iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.6456594840633!2d126.9605877773415!3d37.398211272082726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5e22e41f0957%3A0x178d4d81863377e9!2z6rK96riw64-EIOyViOyWkeyLnCDrj5nslYjqtawg7Iuc66-864yA66GcMzI367KI6ri4IDExLTQx!5e0!3m2!1sko!2skr!4v1740747321911!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        </div>
+    </div>
+
+    <!-- 푸터 섹션 -->
+    <div class="footer">
+        Copyright 2024 만들다소프트 Corp. All Rights Reserved. Powered by Mandulda <br>
+        Language:
+        <a href="index.html">English</a> | 한국어 |
+        <a href="https://sites.google.com/view/terms-of-use-findcartogether/%ED%99%88">이용약관</a> |
+        <a href="https://sites.google.com/view/findmycar-pip/%ED%99%88">개인정보처리방침</a>
+    </div>
+
+    <script>
+        // 페이지가 로드되면 'visible' 클래스 즉시 적용
+        document.getElementById('textOverlay').classList.add('visible');
+    </script>
+
+
+</body>
+</html>

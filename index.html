@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<haead>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MandledaSoft Corp.</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            color: white;
+            z-index: 2;
+            text-align: left;
+            opacity: 0;
+            transition: all 1s ease-out;
+            transform: translateX(-50px);
+        }
+
+        .overlay-text h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .overlay-text p {
+            font-size: 20px;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .content-section {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 50px 0;
+align-items: center;
+        }
+
+        .content-box {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .content-box img {
+            width: 100%;
+            height: auto;
+            max-height: 700px;
+            object-fit: cover;
+        }
+
+        .content-text {
+            padding: 20px;
+justify-content: center;
+        }
+
+        .content-text h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .content-text p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Bottom Section */
+        .features-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #2C2C2C;
+            color: white;
+        }
+
+        .feature-box {
+            width: 30%;
+            text-align: center;
+        }
+
+        .feature-box img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .feature-box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .feature-box p {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* Our Team Section */
+        .team-section {
+            display: flex;
+            padding: 50px;
+            background-color: #f5f5f5;
+        }
+
+        .team-text {
+            width: 40%;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+
+        .team-text h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .team-text p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 60%;
+        }
+
+        .team-grid img {
+            width: 50%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        /* Responsive Fix */
+        @media screen and (max-width: 768px) {
+            .content-box, .feature-box {
+                width: 100%;
+            }
+
+            .team-section {
+                flex-direction: column;
+            }
+
+            .team-text {
+                width: 100%;
+                padding-bottom: 20px;
+            }
+
+            .team-grid {
+                width: 100%;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Contact Section */
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #f5f5f5;
+flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
+        }
+
+        .contact-box {
+            width: 30%;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+ box-sizing: border-box; /* 박스 크기를 잘 관리하도록 추가 */
+        }
+
+        .contact-box h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .contact-box input, 
+        .contact-box textarea, 
+        .contact-box button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .contact-box textarea {
+            height: 120px;
+        }
+
+        .contact-box button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .contact-box button:hover {
+            background-color: #0056b3;
+        }
+
+        .contact-info {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .map {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+            border: 0;
+        }
+/* 반응형 디자인 */
+@media screen and (max-width: 992px) {
+    .contact-box {
+        width: 45%; /* 작은 화면에서는 더 넓게 설정 */
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .contact-box {
+        width: 100%; /* 작은 화면에서는 가득 채우기 */
+    }
+}
+
+        /* Footer Section */
+        .footer {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 992px) {
+            .contact-section {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .contact-box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .map {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Section -->
+    <div class="container">
+        <iframe src="https://www.youtube.com/embed/fEEPxeDGV08?autoplay=1&mute=1&loop=1&playlist=fEEPxeDGV08" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="overlay-text visible" id="textOverlay">
+            <h1>We Are MandledaSoft</h1>
+            <p>Innovative Technology for a Safer World</p>
+        </div>
+    </div>
+
+    <!-- New Layout Section -->
+    <div class="content-section">
+        <div class="content-box content-text">
+            <h2>About MandledaSoft</h2>
+            <h3>Pioneering Technology with Purpose</h3>
+            <p>
+                MandledaSoft was founded with the goal of creating meaningful solutions through technology. We developed the "다함께차찾자" app, available on both Android and iOS platforms, which goes beyond just locating vehicles. It precisely identifies which floor your car is parked on, even in complex multi-story underground garages.
+                In addition to vehicle tracking, our app has versatile uses, including finding lost individuals, assisting in emergency rescue situations, locating people during building collapses, and providing accurate guidance to your destination. We are committed to innovating for a safer and more connected world.
+            </p>
+        </div>
+        <div class="content-box">
+            <img src="img/background.png" alt="App Overview Image">
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="content-box">
+            <img src="img/back2.jpg" alt="Team Image">
+        </div>
+        <div class="content-box content-text">
+            <h2>Our Story</h2>
+            <h3>Driven by Innovation and Safety</h3>
+            <p>
+                MandledaSoft began with a vision to change the way technology supports everyday life. The development of "다함께차찾자" exemplifies our dedication to making practical and safety-driven innovations. Whether you're locating your vehicle or ensuring the safety of loved ones in emergencies, our technology is designed to give you peace of mind. Our story is one of progress, purpose, and pioneering solutions.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bottom Features Section -->
+    <div class="features-section">
+        <div class="feature-box">
+            <img src="img/shake_hand.png" alt="Teamwork Icon">
+            <h3>Collaboration</h3>
+            <p>
+                At Mandleda, we believe that the best ideas come from collaboration. Our team works closely together to deliver successful projects, leveraging diverse talents and expertise.
+            </p>
+        </div>
+        <div class="feature-box">
+            <img src="img/skill.png" alt="Technology Icon">
+            <h3>Cutting-Edge Technology</h3>
+            <p>
+                We continuously embrace the latest technologies to create innovative solutions that solve real-world problems, keeping us at the forefront of the industry.
+            </p>
+        </div>
+        <div class="feature-box">
+            <img src="img/trust.png" alt="Trust Icon">
+            <h3>Trust</h3>
+            <p>
+                Building trust with our customers is our top priority. We ensure that our products are reliable and secure, providing solutions that people can depend on.
+            </p>
+        </div>
+    </div>
+
+    <!-- Our Team Section -->
+    <div class="team-section">
+        <div class="team-text">
+            <h2>Application Introduction</h2>
+<h3>An Item Leading Innovation</h3>
+<p>
+    "FindMyCar Together" offers an innovative and highly scalable solution to meet the demands of various industries.
+</p>
+<p>
+    The altitude-based tracking technology integrates AI and GIS technologies to operate across multiple platforms, providing accurate and reliable location services.
+</p>
+<p>
+    This service is a versatile tool that can be applied across a wide range of industries.
+</p>
+        </div>
+        <div class="team-grid">
+	    <img src="img/2.png" alt="Team Member 1">
+            <img src="img/3.png" alt="Team Member 2">
+            <img src="img/4.png" alt="Team Member 3">
+            <img src="img/5.png" alt="Team Member 4">
+            <img src="img/6.png" alt="Team Member 5">
+            <img src="img/7.png" alt="Team Member 6">
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <!-- Contact Form -->
+        <div class="contact-box">
+            <h2>Contact Us</h2>
+	      <form action="mailto:sun@mdd.kr" method="post">
+                <input type="text" name="name" placeholder="Enter your name" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="tel" name="phone" placeholder="Enter your phone number" required>
+                <textarea name="message" placeholder="Enter your message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-box">
+            <h2>Get in Touch</h2>
+            <p class="contact-info">
+                At MandledaSoft, we are always here to assist you. If you have any inquiries or require support, feel free to reach out to us at the following:<br><br>
+                Number: 070-8098-1269<br>
+                Email: sun@mdd.kr<br><br>
+                We look forward to connecting with you.
+            </p>
+        </div>
+
+        <!-- Location Section -->
+        <div class="contact-box">
+            <h2>Our Location</h2>
+            <p class="contact-info">
+                You can find us at:<br>
+                경기도 안양시 동안구 시민대로327번길 11-41,3층 3417호(관양동)<br>
+                (11-41, Simin-daero 327beon-gil, Dongan-gu, Anyang-si, Gyeonggi-do, Republic of Korea)
+            </p>
+            <!-- Google Map Embed -->
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.6456594840633!2d126.9605877773415!3d37.398211272082726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5e22e41f0957%3A0x178d4d81863377e9!2z6rK96riw64-EIOyViOyWkeyLnCDrj5nslYjqtawg7Iuc66-864yA66GcMzI367KI6ri4IDExLTQx!5e0!3m2!1sko!2skr!4v1740747321911!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        Copyright 2024 MandledaSoft Corp. All Rights Reserved. Powered by Mandleda <br>
+        Language: 
+        English | <a href="index2.html">한국어</a> |
+        <a href="https://sites.google.com/view/terms-of-use-findcartogether/%ED%99%88">Terms of Use</a> |
+        <a href="https://sites.google.com/view/findmycar-pip/%ED%99%88">privacy policy</a>
+    </div>
+
+    <script>
+        // Immediate application of the 'visible' class when the page loads
+        document.getElementById('textOverlay').classList.add('visible');
+    </script>
+    
+
+</body>
+</html>
+
