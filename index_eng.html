@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<haead>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
@@ -12,6 +12,22 @@
             height: 100%;
             overflow-x: hidden;
             font-family: Arial, sans-serif;
+        }
+
+        .no-margin-padding {
+            margin: 0;
+            padding: 0;
+        }
+
+        .inline-block {
+            margin-left: 1rem;
+            display: inline-block;
+        }
+
+        .inline-block-logo {
+            display: inline-block;
+            margin: auto;
+            padding: 0;
         }
 
         .container {
@@ -28,6 +44,8 @@
         }
 
         .overlay-text {
+            display: flex;
+            align-items: center;
             position: absolute;
             top: 50%;
             left: 10%;
@@ -59,7 +77,7 @@
             flex-wrap: wrap;
             width: 100%;
             padding: 50px 0;
-align-items: center;
+            align-items: center;
         }
 
         .content-box {
@@ -77,7 +95,7 @@ align-items: center;
 
         .content-text {
             padding: 20px;
-justify-content: center;
+            justify-content: center;
         }
 
         .content-text h2 {
@@ -90,7 +108,7 @@ justify-content: center;
             line-height: 1.6;
         }
 
-        /* Bottom Section */
+        /* 하단 섹션 */
         .features-section {
             display: flex;
             justify-content: space-between;
@@ -121,7 +139,7 @@ justify-content: center;
             line-height: 1.4;
         }
 
-        /* Our Team Section */
+        /* 팀 섹션 */
         .team-section {
             display: flex;
             padding: 50px;
@@ -158,7 +176,7 @@ justify-content: center;
             border-radius: 5px;
         }
 
-        /* Responsive Fix */
+        /* 반응형 수정 */
         @media screen and (max-width: 768px) {
             .content-box, .feature-box {
                 width: 100%;
@@ -185,13 +203,13 @@ justify-content: center;
             }
         }
 
-        /* Contact Section */
+        /* 연락처 섹션 */
         .contact-section {
             display: flex;
             justify-content: space-between;
             padding: 50px;
             background-color: #f5f5f5;
-flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
+            flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
         }
 
         .contact-box {
@@ -199,7 +217,7 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
             padding: 20px;
             background-color: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
- box-sizing: border-box; /* 박스 크기를 잘 관리하도록 추가 */
+            box-sizing: border-box; /* 박스 크기를 잘 관리하도록 추가 */
         }
 
         .contact-box h2 {
@@ -207,8 +225,8 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
             margin-bottom: 20px;
         }
 
-        .contact-box input, 
-        .contact-box textarea, 
+        .contact-box input,
+        .contact-box textarea,
         .contact-box button {
             width: 90%;
             padding: 10px;
@@ -244,21 +262,22 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
             margin-top: 20px;
             border: 0;
         }
-/* 반응형 디자인 */
-@media screen and (max-width: 992px) {
-    .contact-box {
-        width: 45%; /* 작은 화면에서는 더 넓게 설정 */
-        margin-bottom: 20px;
-    }
-}
 
-@media screen and (max-width: 768px) {
-    .contact-box {
-        width: 100%; /* 작은 화면에서는 가득 채우기 */
-    }
-}
+        /* 반응형 디자인 */
+        @media screen and (max-width: 992px) {
+            .contact-box {
+                width: 45%; /* 작은 화면에서는 더 넓게 설정 */
+                margin-bottom: 20px;
+            }
+        }
 
-        /* Footer Section */
+        @media screen and (max-width: 768px) {
+            .contact-box {
+                width: 100%; /* 작은 화면에서는 가득 채우기 */
+            }
+        }
+
+        /* 푸터 섹션 */
         .footer {
             background-color: #0056b3;
             color: white;
@@ -267,7 +286,7 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
             font-size: 14px;
         }
 
-        /* Responsive Design */
+        /* 반응형 디자인 */
         @media screen and (max-width: 992px) {
             .contact-section {
                 flex-direction: column;
@@ -291,8 +310,13 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
     <div class="container">
         <iframe src="https://www.youtube.com/embed/fEEPxeDGV08?autoplay=1&mute=1&loop=1&playlist=fEEPxeDGV08" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <div class="overlay-text visible" id="textOverlay">
-            <h1>We Are MandledaSoft</h1>
-            <p>Innovative Technology for a Safer World</p>
+            <div class="inline-block-logo">
+                <img src="img/logo.png" width="120px" height="120px">
+            </div>
+            <div class="inline-block">
+                <h1>FindCarTogether</h1>
+                <p class="no-margin-padding">Innovative Technology for a Safer World</p>
+            </div>
         </div>
     </div>
 
@@ -355,7 +379,7 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
             <h2>Application Introduction</h2>
 <h3>An Item Leading Innovation</h3>
 <p>
-    "FindMyCar Together" offers an innovative and highly scalable solution to meet the demands of various industries.
+    "FindMyCarTogether" offers an innovative and highly scalable solution to meet the demands of various industries.
 </p>
 <p>
     The altitude-based tracking technology integrates AI and GIS technologies to operate across multiple platforms, providing accurate and reliable location services.
@@ -415,7 +439,7 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
     <!-- Footer Section -->
     <div class="footer">
         Copyright 2024 MandledaSoft Corp. All Rights Reserved. Powered by Mandleda <br>
-        Language: 
+        Language:
         English | <a href="index.html">한국어</a> |
         <a href="https://sites.google.com/view/terms-of-use-findcartogether/%ED%99%88">Terms of Use</a> |
         <a href="https://sites.google.com/view/findmycar-pip/%ED%99%88">privacy policy</a>
@@ -425,7 +449,7 @@ flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
         // Immediate application of the 'visible' class when the page loads
         document.getElementById('textOverlay').classList.add('visible');
     </script>
-    
+
 
 </body>
 </html>
